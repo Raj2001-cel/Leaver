@@ -33,4 +33,7 @@ public class DAOUser {
 		this.password = password;
 	}
 
+
+
+
 }
