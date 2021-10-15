@@ -8,11 +8,13 @@ public class ImageModel {
     public ImageModel() {
         super();
     }
+
     public ImageModel(String name, String type, byte[] picByte) {
         this.name = name;
         this.type = type;
         this.picByte = picByte;
     }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +23,6 @@ public class ImageModel {
     private String name;
     @Column(name = "type")
     private String type;
-
-
 
     //image bytes can have large lengths so we specify a value
     //which is more than the default length for picByte column
@@ -46,4 +46,5 @@ public class ImageModel {
     public void setPicByte(byte[] picByte) {
         this.picByte = picByte;
     }
+
 }

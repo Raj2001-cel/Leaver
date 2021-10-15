@@ -1,0 +1,23 @@
+after model prediction:
+
+post method should contain:
+first user clicks on start report button gets the report Id , then takes a photo and makes a get request to server with image ,our model predicts the output for the image and returns a Leaf object after doing this for more than 1 leaf . user can print the report . after click on make report get request on server with reportId and then backend will return all the leaf objects with same report Id.
+Leaf:
+ 1.LeafId
+ 2.isDiseased
+ 3.Name
+ 4.ReportId
+ 5.imageName(leafId+Name)
+ 6.bytes of image
+
+Report:
+  1.ReportId
+  2.SenderName
+  3.RecieverName
+  4.Number of Leaf diagonised
+  5.Date and time
+  6.Number of diseased leaves
+  7.Number of healthy leaves
+  8.Farm address
+
+  
