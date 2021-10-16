@@ -1,59 +1,42 @@
 package com.javainuse.controller;
 
 import com.javainuse.dao.ImageRepository;
-import com.javainuse.dao.LeafRepository;
 import com.javainuse.model.ImageModel;
 import com.javainuse.model.Leaf;
+import com.javainuse.model.Report;
 import com.javainuse.service.LeafService;
+import com.javainuse.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.zip.DataFormatException;
-import java.util.zip.Inflater;
+import java.util.List;
+import java.util.Properties;
 
 import static com.javainuse.util.ImageProcessing.compressBytes;
-import static com.javainuse.util.ImageProcessing.decompressBytes;
 
 @RestController
 public class HelloWorldController {
 
-	private final String UPLOAD_DIR = "C:/Users/Raj/Downloads/LoginUsingJWT-main/LoginUsingJWT-main/uploads/";
 	@Autowired
 	ImageRepository imageRepository;
 
-
 	@Autowired
 	LeafService leafService;
-//	@PostMapping("/upload")
-//	public ResponseEntity<ImageModel> uplaodImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
-//		System.out.println("Original Image Byte Size - " + file.getBytes().length);
-//		ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),
-//				compressBytes(file.getBytes()));
-//		imageRepository.save(img);
-//		return ResponseEntity.status(HttpStatus.OK).body(img);
-//	}
-//
-//
-//
-//	@GetMapping(path = { "/upload/{imageName}" })
-//	public ImageModel getImage(@PathVariable("imageName") String imageName) throws IOException {
-//		final Optional<ImageModel> retrievedImage = imageRepository.findByName(imageName);
-//		ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
-//				decompressBytes(retrievedImage.get().getPicByte()));
-//		return img;
-//	}
+
+	@Autowired
+	ReportService reportService;
+
 
 
 	@GetMapping(path = {"/leaf/{reportId}"})
 	public ResponseEntity<ArrayList<Leaf>> getAllLeafByReportId(@PathVariable("reportId") Long reportId){
 		ArrayList<Leaf>  AllLeaves  = leafService.getAllLeafByReportId(reportId);
+
 		return ResponseEntity.status(HttpStatus.OK).body(AllLeaves);
 	}
 
@@ -81,6 +64,27 @@ public class HelloWorldController {
 	}
 
 
+	@PostMapping(name = "/report")
+	public Report  saveReport(@RequestBody Report report){
+
+		return reportService.save(report);
+	}
+
+	@GetMapping(name = "/report")
+	public List<Report> getAllReport(){
+		return reportService.getAllReports();
+	}
+
+//	@GetMapping(name="/find/{reportId}")
+//	public Report getReportByReportId(@PathVariable("reportId") Long reportId){
+//		return reportService.getReportByReportId(reportId);
+//	}
+
+//	@GetMapping(name = "/report/{date}")
+//	public List<Report> getReportsByDate( @PathVariable("date") Long date){
+//		return reportService.getAllReportsByDate(date);
+//	}
+
 	public boolean predict(ImageModel imageModel){
 		//load the model
 
@@ -90,6 +94,9 @@ public class HelloWorldController {
 
 		return true;
 	}
+
+
+
 
 
 
