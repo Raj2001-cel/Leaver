@@ -75,6 +75,16 @@ public class HelloWorldController {
 		return reportService.getAllReports();
 	}
 
+//	@GetMapping(name="/find/{reportId}")
+//	public Report getReportByReportId(@PathVariable("reportId") Long reportId){
+//		return reportService.getReportByReportId(reportId);
+//	}
+
+//	@GetMapping(name = "/report/{date}")
+//	public List<Report> getReportsByDate( @PathVariable("date") Long date){
+//		return reportService.getAllReportsByDate(date);
+//	}
+
 	public boolean predict(ImageModel imageModel){
 		//load the model
 

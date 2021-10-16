@@ -20,4 +20,12 @@ public class ReportService {
     public List<Report> getAllReports(){
         return reportDao.findAll();
     }
+
+//    public Report getReportByReportId(Long reportId){
+//        return reportDao.findById(reportId).get();
+//    }
+//
+//    public List<Report> getAllReportsByDate(Long date){
+//        return reportDao.findAllReportsByDate(date);
+//    }
 }
