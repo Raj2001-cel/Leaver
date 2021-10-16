@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
@@ -49,6 +50,12 @@ public class HelloWorldController {
 //		return img;
 //	}
 
+
+	@GetMapping(path = {"/leaf/{reportId}"})
+	public ResponseEntity<ArrayList<Leaf>> getAllLeafByReportId(@PathVariable("reportId") Long reportId){
+		ArrayList<Leaf>  AllLeaves  = leafService.getAllLeafByReportId(reportId);
+		return ResponseEntity.status(HttpStatus.OK).body(AllLeaves);
+	}
 
 	@PostMapping(path = {"/predict/{reportId}"})
 	public ResponseEntity<Leaf> postImage(@RequestParam("imageFile") MultipartFile file,@PathVariable("reportId") Long reportId) throws IOException {
