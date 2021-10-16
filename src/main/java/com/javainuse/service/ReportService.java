@@ -1,19 +1,23 @@
 package com.javainuse.service;
 
-
-import com.javainuse.dao.ReportRepository;
+import com.javainuse.dao.ReportDao;
 import com.javainuse.model.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReportService {
-
     @Autowired
-    ReportRepository reportRepository;
+    private ReportDao reportDao;
 
-    public Report saveReport(Report report){
-        return reportRepository.save(report);
+    public Report save(Report report) {
+    return reportDao.save(report);
+
     }
 
+    public List<Report> getAllReports(){
+        return reportDao.findAll();
+    }
 }

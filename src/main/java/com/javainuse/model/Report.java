@@ -1,8 +1,10 @@
 package com.javainuse.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Entity
 public class Report {
     public Report(){}
 

@@ -1,7 +1,6 @@
 package com.javainuse.controller;
 
 import com.javainuse.dao.ImageRepository;
-import com.javainuse.dao.LeafRepository;
 import com.javainuse.model.ImageModel;
 import com.javainuse.model.Leaf;
 import com.javainuse.model.Report;
@@ -13,15 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.zip.DataFormatException;
-import java.util.zip.Inflater;
+import java.util.List;
+import java.util.Properties;
 
 import static com.javainuse.util.ImageProcessing.compressBytes;
-import static com.javainuse.util.ImageProcessing.decompressBytes;
 
 @RestController
 public class HelloWorldController {
@@ -34,6 +30,7 @@ public class HelloWorldController {
 
 	@Autowired
 	ReportService reportService;
+
 
 
 	@GetMapping(path = {"/leaf/{reportId}"})
@@ -69,7 +66,13 @@ public class HelloWorldController {
 
 	@PostMapping(name = "/report")
 	public Report  saveReport(@RequestBody Report report){
-		return reportService.saveReport(report);
+
+		return reportService.save(report);
+	}
+
+	@GetMapping(name = "/report")
+	public List<Report> getAllReport(){
+		return reportService.getAllReports();
 	}
 
 	public boolean predict(ImageModel imageModel){

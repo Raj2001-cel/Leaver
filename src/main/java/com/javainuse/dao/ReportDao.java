@@ -1,8 +1,9 @@
 package com.javainuse.dao;
 
-import com.javainuse.model.Leaf;
 import com.javainuse.model.Report;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ReportRepository extends JpaRepository<Report, Long> {
+@Repository
+public interface ReportDao extends JpaRepository<Report,Long> {
 }
